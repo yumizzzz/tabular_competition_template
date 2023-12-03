@@ -1,0 +1,21 @@
+project_name: titanic
+exp_name: exp001
+run_name: ${setting.exp_name}_${now:%Y%m%d_%H%M%S}
+
+seed: 42
+target_col: Survived
+group_col: null
+
+numerical_features:
+  - "Age"
+  - "SibSp"
+  - "Parch"
+  - "Fare"
+
+categorical_features:
+  - "Pclass"
+  - "Name"
+  - "Sex"
+  - "Ticket"
+  - "Cabin"
+  - "Embarked"

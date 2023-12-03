@@ -1,0 +1,11 @@
+data_dir: data
+features_dir: results/features/${setting.exp_name}
+figs_dir: results/figs/${setting.exp_name}
+logs_dir: results/logs/${setting.exp_name}
+models_dir: results/models/${setting.exp_name}
+oof_dir: results/oof/${setting.exp_name}
+submission_dir: results/submission/${setting.exp_name}
+
+train_csv_path: ${dir.data_dir}/train.csv
+test_csv_path: ${dir.data_dir}/test.csv
+submission_csv_path: ${dir.data_dir}/sample_submission.csv

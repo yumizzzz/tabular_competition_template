@@ -1,0 +1,37 @@
+model_name: LightGBM
+
+features:
+  - IdentityBlock
+  - LabelEncodingBlock
+
+categorical_feature:
+  - "le_Pclass"
+  - "le_Name"
+  - "le_Sex"
+  - "le_Ticket"
+  - "le_Cabin"
+  - "le_Embarked"
+
+cv_method: StratifiedKFold
+n_splits: 5
+shuffle: true
+metric: AUC
+
+params:
+  objective: binary
+  metric: auc
+  verbosity: -1
+  boosting_type: gbdt
+  learning_rate: 0.05
+  max_depth: 5
+  num_leaves: 31
+  min_child_samples: 66
+  bagging_seed: 0
+  feature_fraction: 0.8
+  bagging_fraction: 0.8
+  reg_alpha: 0
+  reg_lambda: 1
+
+early_stopping_rounds: 100
+log_evaluation_period: 100
+num_boost_round: 10000
