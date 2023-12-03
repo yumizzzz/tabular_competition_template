@@ -1,5 +1,3 @@
-from typing import List, Optional, Union
-
 import pandas as pd
 from sklearn.preprocessing import OrdinalEncoder
 
@@ -9,7 +7,7 @@ from src.features.base import AbstractBaseBlock
 class LabelEncodingBlock(AbstractBaseBlock):
     """ラベルエンコーディングを行う"""
 
-    def __init__(self, columns: Union[str, List[str]], source_df: Optional[pd.DataFrame] = None):
+    def __init__(self, columns: list[str], source_df: pd.DataFrame | None = None):
         self.columns = columns
         self.source_df = source_df
 

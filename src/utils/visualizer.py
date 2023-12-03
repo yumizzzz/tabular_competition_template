@@ -1,11 +1,9 @@
-from typing import List
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
 
-def create_feature_importance(f_importances_list: List[pd.DataFrame]) -> plt.Figure:
+def create_feature_importance(f_importances_list: list[pd.DataFrame]) -> plt.Figure:
     """特徴量の重要度を保存する"""
 
     feature_importance_df = pd.concat(f_importances_list)

@@ -1,12 +1,16 @@
+from typing import Literal
+
 import numpy as np
 from sklearn.metrics import accuracy_score, log_loss, mean_absolute_error, mean_squared_error, roc_auc_score
 
+METRIC = Literal["MAE", "RMSE", "AUC", "logloss", "Accuracy"]
 
-def metric(method: str, y_true: np.ndarray, y_pred: np.ndarray) -> float:
+
+def metric(method: METRIC, y_true: np.ndarray, y_pred: np.ndarray) -> float:
     """評価指標を選択して計算する
 
     Args:
-        method (str): 評価指標
+        method (METRIC): 評価指標
         y_true (np.ndarray): 正解ラベル
         y_pred (np.ndarray): 予測ラベル
 

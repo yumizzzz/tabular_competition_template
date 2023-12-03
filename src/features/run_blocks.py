@@ -1,17 +1,16 @@
 import os
 from pathlib import Path
-from typing import List, Union
 
 import pandas as pd
 
 from src.features import AbstractBaseBlock
-from src.utils.timer import timer
+from src.utils.utils import timer
 
 
 def run_blocks(
     input_df: pd.DataFrame,
-    blocks: List[AbstractBaseBlock],
-    save_dir: Union[str, Path],
+    blocks: list[AbstractBaseBlock],
+    save_dir: str | Path,
     is_train: bool = False,
 ) -> None:
     """特徴量エンジニアリングを実施"""

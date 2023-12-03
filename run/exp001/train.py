@@ -44,8 +44,8 @@ def main(cfg: DictConfig) -> None:
     cv = select_cv_method(cfg.model.cv_method, cfg.model.n_splits, cfg.model.shuffle, cfg.setting.seed)
 
     oof = np.zeros(x_train.shape[0])
-    test_preds = []
-    feature_importance_list = []
+    test_preds: list[np.ndarray] = []
+    feature_importance_list: list[pd.DataFrame] = []
 
     for i_fold, (train_idx, valid_idx) in enumerate(cv.split(x_train, y_train, group)):
         print(f"================== 🚀 Start training: Fold{i_fold} ==================")

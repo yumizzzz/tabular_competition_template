@@ -1,5 +1,3 @@
-from typing import List
-
 import hydra
 import pandas as pd
 from omegaconf import DictConfig
@@ -24,7 +22,7 @@ def main(cfg: DictConfig) -> None:
     all_df = pd.concat([train_df, test_df], axis=0).reset_index(drop=True)
 
     # 特徴量変換関数の定義
-    feature_run_blocks: List[AbstractBaseBlock] = [
+    feature_run_blocks: list[AbstractBaseBlock] = [
         IdentityBlock(cfg.setting.numerical_features),
         LabelEncodingBlock(cfg.setting.categorical_features, all_df),
     ]
@@ -34,11 +32,11 @@ def main(cfg: DictConfig) -> None:
     run_blocks(test_df, feature_run_blocks, cfg.dir.features_dir, is_train=False)
 
     # 目的変数の保存
-    target_run_blocks: List[AbstractBaseBlock] = [TargetBlock(cfg.setting.target_col)]
+    target_run_blocks: list[AbstractBaseBlock] = [TargetBlock(cfg.setting.target_col)]
     run_blocks(train_df, target_run_blocks, cfg.dir.features_dir, is_train=True)
 
     if cfg.setting.group_col is not None:
-        group_run_blocks: List[AbstractBaseBlock] = [GroupBlock(cfg.setting.group_col)]
+        group_run_blocks: list[AbstractBaseBlock] = [GroupBlock(cfg.setting.group_col)]
         run_blocks(train_df, group_run_blocks, cfg.dir.features_dir, is_train=True)
 
 

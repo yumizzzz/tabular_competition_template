@@ -4,17 +4,17 @@ import pandas as pd
 
 
 class AbstractBaseBlock(metaclass=ABCMeta):
-    """特徴量変換の基底クラス
+    """特徴量変換の基底クラス"""
 
-    Args:
-        input_df (pd.DataFrame): 説明変数
+    def fit(self, input_df: pd.DataFrame) -> pd.DataFrame:
+        """学習用データに対し, 内部状態の更新及び特徴量変換を行う
 
-    Raises:
-        NotImplementedError: 子クラスでtransformメソッドを実装していない場合に発生
-    """
+        Args:
+            input_df (pd.DataFrame): 学習用説明変数
 
-    def fit(self, input_df: pd.DataFrame):
-        """学習用データに対し, 内部状態の更新及び特徴量変換を行う"""
+        Returns:
+            pd.DataFrame: 特徴量変換した説明変数
+        """
         return self.transform(input_df)
 
     @abstractmethod
