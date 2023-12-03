@@ -17,21 +17,24 @@ n_splits: 5
 shuffle: true
 metric: AUC
 
+# https://lightgbm.readthedocs.io/en/latest/Parameters.html
+# https://knknkn.hatenablog.com/entry/2021/06/29/125226
+# https://nykergoto.hatenablog.jp/entry/2019/03/29/%E5%8B%BE%E9%85%8D%E3%83%96%E3%83%BC%E3%82%B9%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%A7%E5%A4%A7%E4%BA%8B%E3%81%AA%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%81%AE%E6%B0%97%E6%8C%81%E3%81%A1
 params:
   objective: binary
   metric: auc
   verbosity: -1
   boosting_type: gbdt
-  learning_rate: 0.05
-  max_depth: 5
-  num_leaves: 31
-  min_child_samples: 66
-  bagging_seed: 0
-  feature_fraction: 0.8
-  bagging_fraction: 0.8
-  reg_alpha: 0
-  reg_lambda: 1
+  learning_rate: 0.05  # 木を足し合わせるときに使う重み係数. 大きいと各木の情報を多く使い使用する木の数(num_iterations)が減り荒いモデルになる. 小さいと各木の情報を少なく使い使用する木の数(num_iterations)が増え滑らかなモデルになる. 基本小さい程精度良いが時間とのトレードオフ. チューニング不要
+  max_depth: 5  # 木の深さ. 通常は3-8くらい. defaultは-1で制限なしとなり過学習になりやすい.
+  num_leaves: 31  # 葉の最大数. 理論上2^(max_depth)未満にしかならない. 大きくすると複雑なモデルになるが過学習しやすくなる.
+  min_data_in_leaf: 66  # 1つの葉に入る最小データ数. 値が小さいと葉が細かく分割されるので, 複雑なモデルになるが過学習しやすくなる.
+  feature_fraction: 0.8  # 1つの木を作成する際に用いる特徴量(column)の割合. なお各木で用いる特徴量はランダムに選ばれる.
+  bagging_fraction: 0.8  # 1つの木を作成する際に用いるデータ(row)の割合. なお各木で用いるデータはランダムに選ばれる.
+  lambda_l1: 0  # L1正則化項の係数
+  lambda_l2: 1  # L2正則化項の係数
+  seed: 42  # seed値
 
 early_stopping_rounds: 100
 log_evaluation_period: 100
-num_boost_round: 10000
+num_boost_round: 1000000  # 作成する木の数. early_stoppingを使うので基本無限大. チューニング不要. n_estimators, num_boost_roundと同じ.
