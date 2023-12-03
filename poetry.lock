@@ -698,6 +698,19 @@ plugins = ["setuptools"]
 requirements-deprecated-finder = ["pip-api", "pipreqs"]
 
 [[package]]
+name = "japanize-matplotlib"
+version = "1.1.3"
+description = "matplotlibのフォント設定を自動で日本語化する"
+optional = false
+python-versions = "*"
+files = [
+    {file = "japanize-matplotlib-1.1.3.tar.gz", hash = "sha256:e89e7d9e109820962650e59a130403b59b33915fde3871a265a5891d9bf5e079"},
+]
+
+[package.dependencies]
+matplotlib = "*"
+
+[[package]]
 name = "jedi"
 version = "0.19.1"
 description = "An autocompletion tool for Python that can be used for text editors."
@@ -1011,6 +1024,21 @@ files = [
 
 [package.dependencies]
 traitlets = "*"
+
+[[package]]
+name = "matplotlib-venn"
+version = "0.11.9"
+description = "Functions for plotting area-proportional two- and three-way Venn diagrams in matplotlib."
+optional = false
+python-versions = "*"
+files = [
+    {file = "matplotlib-venn-0.11.9.tar.gz", hash = "sha256:bbf12f2a066c7f8448793b35a307b192004ba4bd8bba133bce09165dbdc9528b"},
+]
+
+[package.dependencies]
+matplotlib = "*"
+numpy = "*"
+scipy = "*"
 
 [[package]]
 name = "mccabe"
@@ -2505,4 +2533,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<=3.11.6"
-content-hash = "7c4732332bd8e96fbeab30f205ffe5062d21f7c244ca2f86ec2437bf70a0b85a"
+content-hash = "4c35e8bffc9884e93a3300622594ec9d7ef9fde94e5822313e9611f490e29027"
