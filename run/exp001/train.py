@@ -39,6 +39,8 @@ def main(cfg: DictConfig) -> None:
     sub_df = load_submission(cfg.dir.submission_csv_path)
     if cfg.setting.group_col is not None:
         group = load_group(cfg.dir.features_dir)
+    else:
+        group = None
 
     # CVの設定
     cv = select_cv_method(cfg.model.cv_method, cfg.model.n_splits, cfg.model.shuffle, cfg.setting.seed)
