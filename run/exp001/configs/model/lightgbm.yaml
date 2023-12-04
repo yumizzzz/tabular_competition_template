@@ -3,6 +3,7 @@ model_name: LightGBM
 features:
   - IdentityBlock
   - LabelEncodingBlock
+  - CountEncodingBlock
 
 categorical_feature:
   - "le_Pclass"

@@ -70,8 +70,8 @@ def main(cfg: DictConfig) -> None:
         va_score = metric(cfg.model.metric, va_y, va_pred)
 
         # logの出力
-        wandb.log({f"Fold{i_fold} train's {cfg.model.metric}": f"{tr_score:.4f}"})
-        wandb.log({f"Fold{i_fold} valid's {cfg.model.metric}": f"{va_score:.4f}"})
+        wandb.log({f"Fold{i_fold} train's {cfg.model.metric}": tr_score})
+        wandb.log({f"Fold{i_fold} valid's {cfg.model.metric}": va_score})
         print(f"training's {cfg.model.metric}: {tr_score:.4f} valid's {cfg.model.metric}: {va_score:.4f}")
 
         # 結果を保持
@@ -86,7 +86,7 @@ def main(cfg: DictConfig) -> None:
 
     # 全体スコアを計算
     oof_score = metric(cfg.model.metric, y_train, oof)
-    wandb.log({f"oof's {cfg.model.metric}": f"{oof_score:.4f}"})
+    wandb.log({f"oof's {cfg.model.metric}": oof_score})
     print(f"oof's {cfg.model.metric}: {oof_score:.4f}")
 
     # feature importanceの可視化保存
