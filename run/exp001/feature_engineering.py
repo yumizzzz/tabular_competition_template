@@ -2,7 +2,7 @@ import hydra
 import pandas as pd
 from omegaconf import DictConfig
 
-from src.features import CountEncodingBlock, GroupBlock, IdentityBlock, LabelEncodingBlock, TargetBlock
+from src.features import CountEncodingBlock, GroupBlock, GroupbyBlock, IdentityBlock, LabelEncodingBlock, TargetBlock
 from src.features.base import AbstractBaseBlock
 from src.features.run_blocks import run_blocks
 from src.utils.utils import seed_everything
@@ -26,6 +26,7 @@ def main(cfg: DictConfig) -> None:
         IdentityBlock(cfg.setting.numerical_features),
         LabelEncodingBlock(cfg.setting.categorical_features, all_df),
         CountEncodingBlock(cfg.setting.categorical_features, all_df),
+        GroupbyBlock("Sex", ["Age", "Pclass"], all_df),
     ]
 
     # 特徴量作成及び保存

@@ -3,6 +3,7 @@ from typing import List
 from .base import AbstractBaseBlock
 from .countencoding import CountEncodingBlock
 from .group import GroupBlock
+from .groupby import GroupbyBlock
 from .identity import IdentityBlock
 from .labelencoding import LabelEncodingBlock
 from .target import TargetBlock
@@ -16,4 +17,5 @@ __all__: List[str] = [
     "TargetEncodingBlock",
     "GroupBlock",
     "TargetBlock",
+    "GroupbyBlock",
 ]
