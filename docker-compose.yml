@@ -4,7 +4,7 @@ services:
     container_name: tabular_compettion_template.dev
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.cpu
     shm_size: '32gb'
     volumes:
       - type: bind
