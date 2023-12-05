@@ -20,7 +20,7 @@ params:
   l2_leaf_reg: 1  # L2正則化項の係数
   random_seed: 42  # seed値
   num_boost_round: 1000000  # 作成する木の数. early_stoppingを使うので基本無限大. チューニング不要. n_estimatorsと同じ.
-  task_type: GPU  # CPU or GPU
+  task_type: CPU  # CPU or GPU
   allow_writing_files: false  # catboost_infoファイルを作成するか否か
 
 early_stopping_rounds: 100
