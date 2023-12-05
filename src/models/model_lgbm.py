@@ -10,7 +10,7 @@ from wandb.lightgbm import log_summary, wandb_callback
 from src.models.base import BaseModel
 
 
-class LightGBM(BaseModel):
+class LightGBMModel(BaseModel):
     """LightGBMモデル"""
 
     def __init__(self, cfg: DictConfig):
@@ -25,8 +25,8 @@ class LightGBM(BaseModel):
     ) -> None:
         """LightGBMモデルの学習を行う"""
 
-        lgb_train = lgb.Dataset(tr_x, tr_y, categorical_feature=self.cfg.categorical_feature)
-        lgb_val = lgb.Dataset(va_x, va_y, reference=lgb_train, categorical_feature=self.cfg.categorical_feature)
+        lgb_train = lgb.Dataset(tr_x, tr_y, categorical_feature=self.cfg.categorical_features)
+        lgb_val = lgb.Dataset(va_x, va_y, reference=lgb_train, categorical_feature=self.cfg.categorical_features)
 
         callbacks = [
             lgb.early_stopping(stopping_rounds=self.cfg.early_stopping_rounds),

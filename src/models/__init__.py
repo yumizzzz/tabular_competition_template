@@ -1,8 +1,9 @@
 from omegaconf import DictConfig
 
-from .model_lgbm import LightGBM
+from .model_catboost import CatBoostModel
+from .model_lgbm import LightGBMModel
 
-MODEL = LightGBM
+MODEL = LightGBMModel | CatBoostModel
 
 
 def build_model(cfg: DictConfig) -> MODEL:
@@ -14,8 +15,9 @@ def build_model(cfg: DictConfig) -> MODEL:
     Returns:
         model (BaseModel): モデル
     """
-    if cfg.model.model_name == "LightGBM":
-        model = LightGBM(cfg.model)
+    if cfg.model.model_name == "LightGBMModel":
+        return LightGBMModel(cfg.model)
+    elif cfg.model.model_name == "CatBoostModel":
+        return CatBoostModel(cfg.model)
     else:
         raise NotImplementedError
-    return model
