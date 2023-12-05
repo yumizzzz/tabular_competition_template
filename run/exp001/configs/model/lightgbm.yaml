@@ -32,6 +32,7 @@ features:
   - LabelEncodingBlock
   - CountEncodingBlock
   - GroupbyBlock
+  - TargetEncodingBlock
 
 categorical_features:
   - "le_Pclass"

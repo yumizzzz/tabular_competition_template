@@ -7,7 +7,20 @@ from src.features.base import AbstractBaseBlock
 
 
 class LabelEncodingBlock(AbstractBaseBlock):
-    """ラベルエンコーディングを行う"""
+    """ラベルエンコーディングを行う
+
+    以下では未知の値は-1に変換. Nanは-999にするようにしている.
+    なお同じ決定木でもモデルによって挙動は異なるので, 以下の点に注意する.
+
+    LightGBMの場合:
+        - Nanがあっても問題ない
+        - 最終のtypeをint型とした場合, categorical_featuresに指定しないと, 数的変数として扱われるので要注意. また負の値はNan扱いとなる
+        - 最終のtypeをcategory型とした場合, categorical_featuresに指定しなくても, 自動でカテゴリ変数として扱われる(指定してもOK)
+    CatBoostの場合:
+        - int型しか扱えない(category型をモデルに渡すとエラーになる)
+        - またNanがあるとエラーになる
+        - 負の値があっても多分大丈夫
+    """
 
     def __init__(
         self,
@@ -20,10 +33,7 @@ class LabelEncodingBlock(AbstractBaseBlock):
         self.type = type
 
     def fit(self, input_df: pd.DataFrame) -> pd.DataFrame:
-        """学習用データに対し, ラベルエンコーディングを行う
-
-        未知の値は-1に変換. Nanは-999にする
-        """
+        """学習用データに対し, ラベルエンコーディングを行う"""
         self.oe = OrdinalEncoder(
             handle_unknown="use_encoded_value",
             unknown_value=-1,

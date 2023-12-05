@@ -2,7 +2,15 @@ import hydra
 import pandas as pd
 from omegaconf import DictConfig
 
-from src.features import CountEncodingBlock, GroupBlock, GroupbyBlock, IdentityBlock, LabelEncodingBlock, TargetBlock
+from src.features import (
+    CountEncodingBlock,
+    GroupBlock,
+    GroupbyBlock,
+    IdentityBlock,
+    LabelEncodingBlock,
+    TargetBlock,
+    TargetEncodingBlock,
+)
 from src.features.base import AbstractBaseBlock
 from src.features.run_blocks import run_blocks
 from src.utils.utils import seed_everything
@@ -24,9 +32,17 @@ def main(cfg: DictConfig) -> None:
     # 特徴量変換関数の定義
     feature_run_blocks: list[AbstractBaseBlock] = [
         IdentityBlock(cfg.setting.numerical_features),
-        LabelEncodingBlock(cfg.setting.categorical_features, all_df, type="int"),
+        LabelEncodingBlock(cfg.setting.categorical_features, all_df),
         CountEncodingBlock(cfg.setting.categorical_features, all_df),
         GroupbyBlock("Sex", ["Age", "Pclass"], all_df),
+        TargetEncodingBlock(
+            "Sex",
+            cfg.setting.target_col,
+            cfg.model.cv_method,
+            cfg.model.n_splits,
+            cfg.model.shuffle,
+            cfg.setting.seed,
+        ),
     ]
 
     # 特徴量作成及び保存
