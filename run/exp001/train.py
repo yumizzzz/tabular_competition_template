@@ -97,7 +97,7 @@ def main(cfg: DictConfig) -> None:
         plt.savefig(Path(cfg.dir.figs_dir, f"{cfg.setting.run_name}_feature_importance.png"))
 
     # oof保存
-    oof_df = pd.DataFrame({"score": oof})
+    oof_df = pd.DataFrame({cfg.setting.target_col: oof})
     Path(cfg.dir.oof_dir).mkdir(parents=True, exist_ok=True)
     oof_df.to_csv(Path(cfg.dir.oof_dir, f"{cfg.setting.run_name}_oof.csv"), index=False)
 
