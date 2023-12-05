@@ -36,6 +36,7 @@ def main(cfg: DictConfig) -> None:
     target_run_blocks: list[AbstractBaseBlock] = [TargetBlock(cfg.setting.target_col)]
     run_blocks(train_df, target_run_blocks, cfg.dir.features_dir, is_train=True)
 
+    # GroupKFold用のカラム保存
     if cfg.setting.group_col is not None:
         group_run_blocks: list[AbstractBaseBlock] = [GroupBlock(cfg.setting.group_col)]
         run_blocks(train_df, group_run_blocks, cfg.dir.features_dir, is_train=True)
